@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APPLIED COLLEGES</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        table {
+            width: 90%;
+            border-collapse: collapse;
+            margin-left: 5%;
+        }
+        th, td {
+            border: 1px solid #DAD7CD;
+            padding: 8px;
+            text-align: left;
+            color: #DAD7CD;
+        }
+        th {
+            background-color: #DAD7CD;
+            color: #344E41;
+        }
+
+    </style>
+</head>
+<body>
+
+    <section id="header">
+        <a class="start-logo" href="../index.html"><img src="../assets/logo.png" alt="Logo" class="logo"></a>
+        
+        <div>
+            <ul id="navbar">
+                <li><a href="./filteredCollege.html">College List</li></a>
+                <li><a href="./appliedColleges.html">Applied Colleges</li></a>
+                <li><a href="./apply.html">Apply again</a></li>
+                <li><a href="../index.html">Home</a></li>
+                <a href="#" id="close"><i class="fa-solid fa-arrow-left"></i></a>
+            </ul>
+        </div>
+
+        <div id="mobile">
+            <i id="bar" class="fa-solid fa-bars hammu" ></i>
+        </div>
+
+    </section>
+
+    <center><h2 style="margin-top: 10%; margin-bottom: 20px; color: #DAD7CD; letter-spacing: 5px; font-size: 40px;">
+        COLLEGES APPLIED:</h2></center>
+    <table>
+        <thead>
+        <tr>
+            <th>AADHAR-ID</th>
+            <th>NAME</th>
+            <th>COLLEGE-NAME</th>
+            <th>BRANCH</th>
+            <th>COLLEGE-ID</th>
+        </tr>
+        </thead>
+        <tbody id="collegeData"> <!-- Corrected ID -->
+        <!-- College data will be dynamically inserted here -->
+        </tbody>
+    </table>
+    
+    <script>
+        async function fetchCollegeData() {
+            try {
+                const response = await fetch('http://localhost:8090/college_data');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch college data');
+                }
+                const data = await response.json();
+                displayCollegeData(data);
+            } catch (error) {
+                console.error('Error fetching college data:', error);
+            }
+        }
+    
+        function displayCollegeData(data) {
+            const collegeDataElement = document.getElementById('collegeData');
+            collegeDataElement.innerHTML = '';
+            data.forEach(college => {
+                const row = document.createElement('tr');
+                Object.values(college).forEach(value => {
+                    const cell = document.createElement('td');
+                    cell.textContent = value;
+                    row.appendChild(cell);
+                });
+                collegeDataElement.appendChild(row);
+            });
+        }
+    
+        fetchCollegeData();
+    </script>
+    <script src="https://kit.fontawesome.com/30581fc693.js" crossorigin="anonymous"></script>
+    <script src="./navigation.js"></script>
+</body>
+</html>

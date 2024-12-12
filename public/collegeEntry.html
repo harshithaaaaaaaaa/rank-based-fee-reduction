@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert College</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <section id="header">
+        <a class="start-logo" href="../index.html"><img src="../assets/logo.png" alt="Logo" class="logo"></a>
+        
+        <div>
+            <ul id="navbar">
+                <li><a href="http://localhost:3000/colleges">College List</a></li>
+                <li><a href="../index.html">Home</a></li>
+                <a href="#" id="close"><i class="fa-solid fa-arrow-left"></i></a>
+            </ul>
+        </div>
+
+        <div id="mobile">
+            <i id="bar" class="fa-solid fa-bars hammu" ></i>
+        </div>
+
+    </section>
+
+    <div class="ia">
+    
+    <form action="http://localhost:3000/insert" method="post" id="ia1" class="todo">
+        <p>College Entry</p>
+        <div class="row">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br><br>
+        <label for="phone">Phone:</label><br>
+        <input type="text" id="phone" name="phone"><br><br>
+        <label for="address">Address:</label><br>
+        <input type="text" id="address" name="address"><br><br>
+        <label for="cet">CET:</label><br>
+        <input type="text" id="cet" name="cet"><br><br>
+        <label for="collegeId">College ID:</label><br>
+        <input type="text" id="collegeId" name="collegeId"><br><br>
+        <label for="minCet">Min CET:</label><br>
+        <input type="text" id="minCet" name="minCet"><br><br>
+        <label for="maxCet">Max CET:</label><br>
+        <input type="text" id="maxCet" name="maxCet"><br><br>
+    </div>
+        <input type="submit" value="Submit" id="submit">
+   
+    </form>
+    </div>
+    <script src="https://kit.fontawesome.com/30581fc693.js" crossorigin="anonymous"></script>
+    <script src="./navigation.js"></script>
+</body>
+</html>

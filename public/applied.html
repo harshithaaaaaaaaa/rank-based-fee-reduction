@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XOLLEGE ENTRY</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <!-- Add your content for creating a class here -->
+
+    <section id="header">
+        <a class="start-logo" href="../index.html"><img src="../assets/logo.png" alt="Logo" class="logo"></a>
+        
+        <div>
+            <ul id="navbar">
+                <li><a href="./filteredCollege.html">College List</li></a>
+                <li><a href="./appliedColleges.html">Applied Colleges</li></a>
+                <li><a href="./apply.html">Apply again</a></li>
+                <li><a href="../index.html">Home</a></li>
+                <a href="#" id="close"><i class="fa-solid fa-arrow-left"></i></a>
+            </ul>
+        </div>
+
+        <div id="mobile">
+            <i id="bar" class="fa-solid fa-bars hammu" ></i>
+        </div>
+
+    </section>
+
+    <div class="ia">
+    
+        <form id="ia1" method="post" class="todo" action="./collegeList.html" target="_blank">
+
+            <p>APPLIED COLLEGES:</p><br>
+
+            <div class="row">
+                <label for="user">AADHAR NUMBER:</label><br>
+                <input type="text" name="aadhar" id="aadhar" required> <br><br>
+
+                <label for="user">FULL NAME:</label><br>
+                <input type="text" name="name" id="name" required> <br><br>
+
+                <label for="user">COLLEGE NAME:</label><br>
+                <input type="text" name="col_name" id="col_name" required> <br><br>
+
+                <label for="user">BRANCH:</label><br>
+                <select name="branch" id="branch" class="role-select" ng-model="formData.role" required>
+                    <option value="">Select Branch</option>
+                    <option value="CSE">Computer Science and Engineering</option>
+                    <option value="ISE">Infromation Science and Engineering</option>
+                    <option value="EC">Electronics and Communication</option>
+                    <option value="AIML">Artificial Intelligence and Machine Learning</option>
+                </select>
+
+                <label for="user">COLLEGE-ID:</label><br>
+                <input type="text" name="col_id" id="col_id" required> <br><br>
+
+            </div>
+            
+            <input type="submit" value="submit" id="submit">
+        </form>
+    </div>   
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("ia1").addEventListener("submit", async function(event) {
+        event.preventDefault(); // Prevent default form submission
+        // Get form values
+        var aadhar = document.getElementById("aadhar").value;
+        var name = document.getElementById("name").value;
+        var col_name = document.getElementById("col_name").value;
+        var branch = document.getElementById("branch").value;
+        var col_id = document.getElementById("col_id").value;
+
+        const formData = {
+            aadhar:aadhar,
+            name:name,
+            col_name:col_name,
+            branch:branch,
+            col_id:col_id
+        };
+
+        localStorage.setItem("aadhar", aadhar);
+        localStorage.setItem("name", name);
+        localStorage.setItem("col_name", col_name);
+        localStorage.setItem("branch", branch);
+        localStorage.setItem("col_id", col_id);
+
+        try {
+            const response = await fetch('http://localhost:8090/submit_form', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+            if (response.ok) {
+                console.log('Form submitted successfully');
+                alert('application successfull');
+                // Redirect to upload.html
+                // window.location.href = "./collegeList.html";
+            } else {
+                console.error('Error submitting form');
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            // alert('Error submitting form: ' + error.message);
+        }
+    });
+});
+
+    </script>
+    
+    <script src="https://kit.fontawesome.com/30581fc693.js" crossorigin="anonymous"></script>
+    <script src="./navigation.js"></script>
+    <script src="./apply.js"></script>
+</body>
+</html>

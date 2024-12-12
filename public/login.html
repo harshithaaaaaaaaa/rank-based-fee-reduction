@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="loginApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+    <div class="containn" ng-controller="LoginController">
+        <div class="login-container">
+            <div class="loginn">
+                <center><img src="../assets/logo.png" alt="logo" class="logo"></center><br>
+                <label for="username">ENTER AADHAR-ID:</label><br>
+                <input type="text" id="username" ng-model="username" required><br>
+                <span ng-show="formSubmitted && !username" style="color: red;">Aadhar ID is required.</span><br><br>
+                <label for="password">PASSWORD:</label><br>
+                <input type="password" id="password" ng-model="password" required><br>
+                <span ng-show="formSubmitted && !password" style="color: red;">Password is required.</span><br><br>
+
+                <label for="">SELECT ROLE:</label><br>
+                <select name="role" id="role" class="role-select" required>
+                    <option value="">Select Role</option>
+                    <option value="steacher">ADMIN</option>
+                    <option value="sstudent">STUDENT</option>
+                </select>
+
+                <!-- <center><p>Don't have an account?  <a href="./signup.html" style="color: #DAD7CD; text-decoration: underline;">SIGNUP</a></p></center> -->
+                <center><button id="loginButton" class="login-button" ng-click="login()">LOGIN</button></center>
+            </div>
+        </div>
+    </div>
+    <script src="login.js"></script>
+    <script>
+        angular.module('loginApp', [])
+            .controller('LoginController', function($scope) {
+                $scope.formSubmitted = false;
+
+                $scope.login = function() {
+                    $scope.formSubmitted = true;
+                    if (!$scope.username || !$scope.password) {
+                        return; // Don't proceed if fields are empty
+                    }
+                    // Your login logic here
+                };
+            });
+    </script>
+</body>
+</html>

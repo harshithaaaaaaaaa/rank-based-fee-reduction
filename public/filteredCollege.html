@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initialscale=1.0">
+    <title>IAMARKS Information</title>
+    <link rel="stylesheet" href="./style.css">
+ <style>
+ table {
+    width: 85%;
+    border-collapse: collapse;
+    margin-left: 7%;
+    }
+    th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    color: #dad7cd;
+    }
+    th {
+    background-color: #dad7cd;
+    color: #344E41;
+ }
+
+ h2{
+    color: #dad7cd;
+    margin-top: 50px;
+    font-size: 40px;
+    margin-bottom: 30px;
+ }
+ </style>
+</head>
+<body>
+    <section id="header">
+        <a class="start-logo" href="../index.html"><img src="../assets/logo.png" alt="Logo" class="logo"></a>
+        
+        <div>
+            <ul id="navbar">
+                <li><a href="./filteredCollege.html">College List</li></a>
+                <li><a href="./appliedColleges.html">Applied Colleges</li></a>
+                <li><a href="./apply.html">Apply again</a></li>
+                <li><a href="../index.html">Home</a></li>
+                <a href="#" id="close"><i class="fa-solid fa-arrow-left"></i></a>
+            </ul>
+        </div>
+
+        <div id="mobile">
+            <i id="bar" class="fa-solid fa-bars hammu" ></i>
+        </div>
+
+    </section>
+ <center><h2>FILTERED COLLEGES</h2></center>
+ <table>
+ <thead>
+ <tr>
+ <th>College Name</th>
+ <th>Phone no.</th>
+ <th>Address</th>
+ <th>rank accepted</th>
+ <th>College ID</th>
+ <th>Min rank accepted</th>
+ <th>Max rank</th>
+ </tr>
+ </thead>
+ <tbody id="studentData">
+ <!-- Student data will be dynamically inserted here -->
+ </tbody>
+ </table>
+ <center><a href="./apply.html"><button class="enroll">Apply</button></a></center>
+ <script>
+ async function fetchStudentData() {
+ try {
+ const response = await fetch('http://localhost:8036/student_data');
+ if (!response.ok) {
+ throw new Error('Failed to fetch data');
+ }
+ const data = await response.json();
+ displayStudentData(data);
+ } catch (error) {
+ console.error('Error fetching student data:', error);
+ }
+ }
+ function displayStudentData(data) {
+ const studentDataElement =
+document.getElementById('studentData');
+ studentDataElement.innerHTML = '';
+ data.forEach(student => {
+ const row = document.createElement('tr');
+ Object.values(student).forEach(value => {
+ const cell = document.createElement('td');
+ cell.textContent = value;
+ row.appendChild(cell);
+ });
+ studentDataElement.appendChild(row);
+ });
+ }
+ fetchStudentData();
+ </script>
+</body>
+</html>
